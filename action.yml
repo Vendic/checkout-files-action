@@ -1,0 +1,20 @@
+name: 'checkout-files-action'
+description: 'Checkout one or multiple files from a repository'
+author: 'Tjitse-E'
+runs:
+    using: 'node12'
+    main: 'dist/index.js'
+inputs:
+    token:
+        description: Your Github
+        required: true
+    owner:
+        description: The owner of the repository
+        required: true
+    repo:
+        description: The name of the repository
+        required: true
+    paths:
+        description: A multiline input of different paths that you want to clone
+        required: true
+
