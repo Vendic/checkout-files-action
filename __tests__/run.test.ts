@@ -30,7 +30,6 @@ test('Should hit the Github REST API twice', async () => {
 beforeEach(() => {
     process.env['INPUT_TOKEN'] = 'xyz'
     process.env['GITHUB_REPOSITORY'] = 'foo/bar';
-    process.env['INPUT_REPO'] = 'github-actions-tests'
-    process.env['INPUT_OWNER'] = 'Vendic'
+    process.env['INPUT_REPO'] = 'Vendic/github-actions-tests'
     process.env['INPUT_PATHS'] = 'hello\nfoo/bar'
 })

@@ -6214,12 +6214,11 @@ var external_fs_ = __nccwpck_require__(747);
 async function run() {
     try {
         const paths = core.getMultilineInput('paths');
-        const owner = core.getInput('owner');
         const repo = core.getInput('repo');
         const token = core.getInput('token');
         const octokit = github.getOctokit(token);
         for (let path of paths) {
-            let response = await getFileContent(octokit, repo, owner, path);
+            let response = await getFileContent(octokit, repo, path);
             if (response.status != 200) {
                 throw new Error(`Received in response code ${response.status} from Github`);
             }
@@ -6230,7 +6229,9 @@ async function run() {
         core.setFailed(`Action failed: ${error}`);
     }
 }
-async function getFileContent(octokit, repo, owner, path) {
+async function getFileContent(octokit, repository, path) {
+    const owner = repository.split('/')[0];
+    const repo = repository.split('/')[1];
     return octokit.rest.repos.getContent({
         owner,
         repo,

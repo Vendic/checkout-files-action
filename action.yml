@@ -8,11 +8,8 @@ inputs:
     token:
         description: Your Github
         required: true
-    owner:
-        description: The owner of the repository
-        required: true
     repo:
-        description: The name of the repository
+        description: The name of the repository (owner/repo-name)
         required: true
     paths:
         description: A multiline input of different paths that you want to clone
