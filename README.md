@@ -3,5 +3,11 @@ Checkout one or multiple files from a repository. Insipred by [Bhacaz/checkout-f
 
 ### Usage
 ```yml
-TODO
+      - uses: Vendic/checkout-files-action@v1.0.0
+        with:
+          paths: |
+            your
+            files
+          repo: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 ```
