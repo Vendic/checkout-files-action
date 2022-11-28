@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {GitHub} from "@actions/github/lib/utils";
 import {OctokitResponse} from "@octokit/types";
-import {GetContentResult} from "./types";
+import {GetContentResult, FileContentRequest} from "./types";
 import * as fs from "fs";
 
 export default async function run(): Promise<void> {
@@ -10,10 +10,11 @@ export default async function run(): Promise<void> {
         const paths = core.getMultilineInput('paths')
         const repo = core.getInput('repo')
         const token = core.getInput('token')
+        const ref = core.getInput('ref') ?? '';
         const octokit = github.getOctokit(token)
 
         for (let path of paths) {
-            let response: GetContentResult = await getFileContent(octokit, repo, path)
+            let response: GetContentResult = await getFileContent(octokit, repo, path, ref)
             if (response.status != 200) {
                 throw new Error(`Received in response code ${response.status} from Github`)
             }
@@ -29,16 +30,21 @@ export default async function run(): Promise<void> {
 async function getFileContent(
     octokit: InstanceType<typeof GitHub>,
     repository: string,
-    path: string
+    path: string,
+    ref: string
 ): Promise<OctokitResponse<any>> {
     const owner = repository.split('/')[0]
     const repo = repository.split('/')[1]
-
-    return octokit.rest.repos.getContent({
+    let payload: FileContentRequest = {
         owner,
         repo,
-        path
-    });
+        path,
+    };
+    if (ref !== '') {
+        payload = {...payload, ref}
+    }
+
+    return octokit.rest.repos.getContent(payload);
 }
 
 function saveContent(path: string, encodedContent: string): void {
