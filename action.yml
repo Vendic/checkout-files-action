@@ -2,7 +2,7 @@ name: 'checkout-files-action'
 description: 'Checkout one or multiple files from a repository'
 author: 'Tjitse-E'
 runs:
-    using: 'node12'
+    using: 'node16'
     main: 'dist/index.js'
 inputs:
     token:
@@ -14,4 +14,7 @@ inputs:
     paths:
         description: A multiline input of different paths that you want to clone
         required: true
+    ref:
+        description: "The name of the commit/branch/tag. Default: the repository’s default branch"
+        required: false
 

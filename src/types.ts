@@ -15,3 +15,10 @@ export type GetContentResult = {
         encoding: string
     }
 }
+
+export type FileContentRequest = {
+    owner: string,
+    repo: string,
+    path: string
+    [key: string]: string
+}
