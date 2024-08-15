@@ -10,4 +10,5 @@ Checkout one or multiple files from a repository. Insipred by [Bhacaz/checkout-f
             files
           repo: ${{ github.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: 'main' # (optional) Default: the repository’s default branch.
 ```
