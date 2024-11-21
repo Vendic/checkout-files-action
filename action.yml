@@ -2,7 +2,7 @@ name: 'checkout-files-action'
 description: 'Checkout one or multiple files from a repository'
 author: 'Tjitse-E'
 runs:
-    using: 'node16'
+    using: 'node20'
     main: 'dist/index.js'
 inputs:
     token:
